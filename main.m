@@ -11,24 +11,22 @@
 
 - (NSString *)stringByPigLatinization
 {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-
-    for (NSString* word in [self componentsSeparatedByString:@" "]) {
-        [array addObject:
-          [
+    return [
+      [NSArray arrayWithObjects:
+        [
             [NSArray arrayWithObjects:
-              [word stringByReplacingCharactersInRange:[word rangeOfString:[[word componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0]] withString:@""],
-              [[word componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0],
+              [[[self componentsSeparatedByString:@" "] objectAtIndex:0] stringByReplacingCharactersInRange:[[[self componentsSeparatedByString:@" "] objectAtIndex:0] rangeOfString:[[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0]] withString:@""],
+              [[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0],
               @"ay",
               nil
             ]
             componentsJoinedByString:@""
-          ]
-        ];
-    }
-
-    NSString *sentenceInPigLatin = [array componentsJoinedByString:@" "];
-    return sentenceInPigLatin;
+        ],
+        [self componentsSeparatedByString:@" "].count - 1 <= 0 ? nil : [[[[self componentsSeparatedByString:@" "] subarrayWithRange:NSMakeRange(1, [self componentsSeparatedByString:@" "].count - 1)] componentsJoinedByString:@" "] stringByPigLatinization],
+        nil
+      ]
+      componentsJoinedByString:@" "
+    ];
 }
 
 @end
@@ -36,6 +34,9 @@
 
 int main(int argc, const char * argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
+  NSLog(@"%@", @"0");
+  NSLog(@"%@", [@"I eat banana"      stringByPigLatinization]);
 
   NSLog(@"%@", @"");
   NSLog(@"%@", @"1");
