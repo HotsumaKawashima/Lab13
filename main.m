@@ -11,22 +11,7 @@
 
 - (NSString *)stringByPigLatinization
 {
-    return [
-      [NSArray arrayWithObjects:
-        [
-            [NSArray arrayWithObjects:
-              [[[self componentsSeparatedByString:@" "] objectAtIndex:0] stringByReplacingCharactersInRange:[[[self componentsSeparatedByString:@" "] objectAtIndex:0] rangeOfString:[[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0]] withString:@""],
-              [[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0],
-              @"ay",
-              nil
-            ]
-            componentsJoinedByString:@""
-        ],
-        [self componentsSeparatedByString:@" "].count - 1 <= 0 ? nil : [[[[self componentsSeparatedByString:@" "] subarrayWithRange:NSMakeRange(1, [self componentsSeparatedByString:@" "].count - 1)] componentsJoinedByString:@" "] stringByPigLatinization],
-        nil
-      ]
-      componentsJoinedByString:@" "
-    ];
+    return [[NSArray arrayWithObjects:[[NSArray arrayWithObjects:[[[self componentsSeparatedByString:@" "] objectAtIndex:0] stringByReplacingCharactersInRange:[[[self componentsSeparatedByString:@" "] objectAtIndex:0] rangeOfString:[[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0]] withString:@""], [[[[self componentsSeparatedByString:@" "] objectAtIndex:0] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"aeiouAEIOU"]] objectAtIndex:0], @"ay", nil] componentsJoinedByString:@""], [self componentsSeparatedByString:@" "].count - 1 <= 0 ? nil : [[[[self componentsSeparatedByString:@" "] subarrayWithRange:NSMakeRange(1, [self componentsSeparatedByString:@" "].count - 1)] componentsJoinedByString:@" "] stringByPigLatinization], nil] componentsJoinedByString:@" "];
 }
 
 @end
